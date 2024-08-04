@@ -1,15 +1,9 @@
 class StateMachine {
-    constructor() {
-        this.states = {};
-        this.currentState = null;
-    }
+    ...
 
-    addState(name, type) {
-        this.states[name] = type;
-        if (!this.currentState) this.currentState = name;
-    }
-
-    transition(newState) {
-        this.currentState = newState;
+    execute(command) {
+        const state = this.states[this.currentState];
+        if (!state) throw new Error(`State '${this.currentState}' does not exist`);
+        state.execute(command, this);
     }
 }
